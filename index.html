@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="hero is-fullheight is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <!-- Header -->
+          <div class="has-text-centered mb-6">
+            <h1 class="title is-1 has-text-white">
+              <i class="fas fa-tasks mr-3"></i>To-Do List
+            </h1>
+            <p class="subtitle is-4 has-text-white">
+              Stay organized, get things done
+            </p>
+          </div>
+
+          <!-- Main App Container -->
+          <div class="columns is-centered">
+            <div class="column is-8-desktop is-10-tablet">
+              <div class="box has-background-white-bis">
+                <!-- Task Input Section -->
+                <div class="field has-addons mb-5">
+                  <div class="control is-expanded">
+                    <input
+                      class="input is-large"
+                      type="text"
+                      id="taskInput"
+                      placeholder="What needs to be done?"
+                      autocomplete="off"
+                    />
+                  </div>
+                  <div class="control">
+                    <button class="button is-large is-primary" id="addTaskBtn">
+                      <i class="fas fa-plus mr-2"></i>Add
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Task Statistics -->
+                <div class="level mb-4">
+                  <div class="level-item has-text-centered">
+                    <div>
+                      <p class="heading">Total Tasks</p>
+                      <p class="title is-4" id="totalTasks">0</p>
+                    </div>
+                  </div>
+                  <div class="level-item has-text-centered">
+                    <div>
+                      <p class="heading">Completed</p>
+                      <p
+                        class="title is-4 has-text-success"
+                        id="completedTasks"
+                      >
+                        0
+                      </p>
+                    </div>
+                  </div>
+                  <div class="level-item has-text-centered">
+                    <div>
+                      <p class="heading">Remaining</p>
+                      <p
+                        class="title is-4 has-text-warning"
+                        id="remainingTasks"
+                      >
+                        0
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Filter Buttons -->
+                <div class="field is-grouped is-grouped-centered mb-4">
+                  <div class="control">
+                    <button class="button is-info is-active" data-filter="all">
+                      All
+                    </button>
+                  </div>
+                  <div class="control">
+                    <button class="button is-success" data-filter="completed">
+                      Completed
+                    </button>
+                  </div>
+                  <div class="control">
+                    <button class="button is-warning" data-filter="pending">
+                      Pending
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Tasks Container -->
+                <div id="tasksContainer">
+                  <!-- Tasks will be dynamically inserted here -->
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="has-text-centered py-6">
+                  <i
+                    class="fas fa-clipboard-list fa-3x has-text-grey-light mb-3"
+                  ></i>
+                  <p class="has-text-grey">
+                    No tasks yet. Add one above to get started!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="scripts/app.js"></script>
+  </body>
+</html>
