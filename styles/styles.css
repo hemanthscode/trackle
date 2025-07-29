@@ -32,9 +32,9 @@ body {
   overflow: hidden;
 }
 
-/* App Container */
+/* App Container - Fixed height to 95vh */
 .app {
-  height: 100vh;
+  height: 95vh;
   display: flex;
   flex-direction: column;
   max-width: 800px;
@@ -48,6 +48,7 @@ body {
   padding: 0.75rem 0 0.5rem 0;
   border-bottom: 1px solid var(--border);
   margin-bottom: 0.75rem;
+  flex-shrink: 0;
 }
 
 .header h1 {
@@ -88,11 +89,13 @@ body {
   box-shadow: var(--shadow), var(--glow);
   backdrop-filter: blur(10px);
   overflow: hidden;
+  min-height: 0;
 }
 
 /* Add Section */
 .add-section {
   margin-bottom: 0.75rem;
+  flex-shrink: 0;
 }
 
 .task-form {
@@ -153,11 +156,16 @@ body {
   align-items: center;
   gap: 0.35rem;
   font-size: 0.8rem;
+  min-height: 44px; /* Better touch target */
 }
 
 .add-btn:hover {
   background: #00cc6a;
   transform: translateY(-1px);
+}
+
+.add-btn:active {
+  transform: translateY(0);
 }
 
 /* Message */
@@ -208,6 +216,7 @@ body {
   align-items: center;
   gap: 0.2rem;
   white-space: nowrap;
+  min-height: 36px; /* Better touch target */
 }
 
 .filter-btn:hover {
@@ -227,6 +236,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 0;
+  overflow: hidden;
 }
 
 .tasks-header {
@@ -236,6 +246,7 @@ body {
   margin-bottom: 0.5rem;
   padding-bottom: 0.4rem;
   border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
 .tasks-header h2 {
@@ -259,6 +270,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.2rem;
+  min-height: 32px; /* Better touch target */
 }
 
 .clear-btn:hover {
@@ -270,7 +282,7 @@ body {
   flex: 1;
   overflow-y: auto;
   padding-right: 0.25rem;
-  min-height: 200px;
+  min-height: 0;
 }
 
 .tasks-container::-webkit-scrollbar {
@@ -328,6 +340,8 @@ body {
   accent-color: var(--primary);
   cursor: pointer;
   flex-shrink: 0;
+  min-width: 20px; /* Better touch target */
+  min-height: 20px;
 }
 
 .task-text {
@@ -361,6 +375,8 @@ body {
   display: flex;
   align-items: center;
   gap: 0.2rem;
+  min-height: 32px; /* Better touch target */
+  min-width: 48px;
 }
 
 .edit-btn {
@@ -407,7 +423,7 @@ body {
   display: none;
 }
 
-/* Stats */
+/* Stats - Fixed mobile rendering */
 .stats {
   display: flex;
   justify-content: space-around;
@@ -417,21 +433,30 @@ body {
   border-radius: 4px;
   border-top: 1px solid var(--border);
   margin-top: 0.75rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
 }
 
 .stat {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.3rem;
   font-size: 0.75rem;
   color: var(--text-primary);
   flex: 1;
-  justify-content: center;
+  min-width: 80px;
+  text-align: center;
 }
 
 .stat i {
   opacity: 0.7;
   font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.stat span {
+  white-space: nowrap;
 }
 
 /* Modal */
@@ -458,6 +483,8 @@ body {
   min-width: 300px;
   max-width: 90vw;
   box-shadow: var(--shadow), var(--glow);
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modal-header {
@@ -486,6 +513,8 @@ body {
   padding: 0.25rem;
   border-radius: 3px;
   transition: var(--transition);
+  min-height: 36px;
+  min-width: 36px;
 }
 
 .close-btn:hover {
@@ -537,6 +566,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  min-height: 44px;
 }
 
 .btn-primary {
@@ -631,10 +661,16 @@ body {
   transform: translateX(-2px);
 }
 
-/* Mobile Optimizations */
+/* Mobile Optimizations - Major fixes here */
 @media (max-width: 480px) {
   .app {
     padding: 0.5rem;
+    height: 97vh; /* Slightly more space on mobile */
+  }
+
+  .header {
+    padding: 0.5rem 0 0.4rem 0;
+    margin-bottom: 0.5rem;
   }
 
   .header h1 {
@@ -658,15 +694,59 @@ body {
 
   .add-btn {
     justify-content: center;
+    padding: 0.7rem;
   }
 
+  /* FIXED: Always show task actions on mobile */
   .task-actions {
-    opacity: 1;
+    opacity: 1 !important;
+  }
+
+  .task-item {
+    padding: 0.5rem;
+    gap: 0.5rem;
+  }
+
+  .task-btn {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7rem;
+    min-height: 36px;
+    min-width: 44px;
   }
 
   .tasks-container {
-    min-height: 180px;
-    max-height: 40vh;
+    min-height: 0;
+    max-height: none;
+  }
+
+  /* FIXED: Better stats layout for mobile */
+  .stats {
+    padding: 0.4rem 0.2rem;
+    margin-top: 0.5rem;
+    gap: 0.2rem;
+  }
+
+  .stat {
+    font-size: 0.65rem;
+    gap: 0.2rem;
+    flex-direction: column;
+    text-align: center;
+    min-width: 60px;
+    padding: 0.2rem;
+  }
+
+  .stat i {
+    font-size: 0.7rem;
+  }
+
+  .stat span {
+    font-size: 0.6rem;
+  }
+
+  .modal-content {
+    min-width: 280px;
+    padding: 0.75rem;
+    margin: 0.5rem;
   }
 
   .modal-actions {
@@ -678,16 +758,24 @@ body {
   .btn-secondary,
   .btn-danger {
     justify-content: center;
+    padding: 0.6rem;
   }
 
+  /* FIXED: Better toast positioning on mobile */
   #toastContainer {
     bottom: 0.5rem;
     right: 0.5rem;
     left: 0.5rem;
     max-width: none;
   }
+
+  .toast {
+    font-size: 0.8rem;
+    padding: 0.6rem 0.8rem;
+  }
 }
 
+/* Extra small screens */
 @media (max-width: 360px) {
   .app {
     padding: 0.4rem;
@@ -701,11 +789,6 @@ body {
     padding: 0.6rem;
   }
 
-  .tasks-container {
-    min-height: 160px;
-    max-height: 35vh;
-  }
-
   .task-item {
     padding: 0.4rem;
     min-height: 2rem;
@@ -717,6 +800,16 @@ body {
 
   .stat {
     font-size: 0.6rem;
+    min-width: 50px;
+  }
+
+  .stat span {
+    font-size: 0.55rem;
+  }
+
+  .filter-btn {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.4rem;
   }
 }
 
@@ -730,6 +823,7 @@ body {
     min-height: 250px;
   }
 
+  /* Only hide actions on larger screens */
   .task-actions {
     opacity: 0;
   }
@@ -755,5 +849,34 @@ body {
 
   .tasks-container {
     min-height: 300px;
+  }
+
+  .stats {
+    padding: 0.8rem;
+  }
+
+  .stat {
+    font-size: 0.8rem;
+  }
+}
+
+/* Landscape orientation fixes for mobile */
+@media (max-width: 480px) and (orientation: landscape) {
+  .app {
+    height: 95vh;
+  }
+
+  .header {
+    padding: 0.3rem 0;
+    margin-bottom: 0.4rem;
+  }
+
+  .add-section {
+    margin-bottom: 0.5rem;
+  }
+
+  .stats {
+    margin-top: 0.4rem;
+    padding: 0.3rem;
   }
 }
