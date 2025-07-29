@@ -1,143 +1,264 @@
-# Trackle – Advanced To-Do List App
+# Trackle - Terminal Task Manager
 
-🎯 **Project Objective**  
-Trackle is a modern, feature-rich web-based to-do list application built with Bulma CSS framework. It provides an intuitive interface for task management with real-time statistics, filtering capabilities, and seamless data persistence through browser local storage.
+> A sleek, cyberpunk-inspired task management application with a terminal interface aesthetic
 
-## ✨ Features
+## Overview
 
-### **Core Functionality**
-- ➕ **Instant Task Addition** – Add tasks with Enter key or click  
-- ✅ **Smart Toggle System** – Mark tasks complete/incomplete with visual feedback  
-- ✏️ **Inline Editing** – Edit tasks directly with click-to-edit functionality  
-- 🗑️ **Safe Deletion** – Delete tasks with confirmation dialogs  
-- 💾 **Auto-Save** – Automatic persistence via `localStorage` with no data loss  
+Trackle is a modern, terminal-themed task manager that combines the nostalgic appeal of command-line interfaces with contemporary web technologies. Built with vanilla JavaScript, HTML5, and CSS3, it offers a clean, efficient way to manage your tasks while providing an immersive terminal experience.
 
-### **Advanced Features**
-- 📊 **Real-time Statistics** – Live counters for total, completed, and remaining tasks  
-- 🔍 **Smart Filtering** – Filter by All, Completed, or Pending tasks  
-- 📱 **Fully Responsive** – Optimized for desktop, tablet, and mobile devices  
-- ⚠️ **Input Validation** – Prevents empty tasks with user-friendly notifications  
-- 🎨 **Modern UI/UX** – Gradient backgrounds, smooth animations, and hover effects  
-- 💬 **Toast Notifications** – Success, warning, and error messages with auto-dismiss  
-- 🎭 **Visual State Management** – Completed tasks show strikethrough styling  
-- ⌨️ **Keyboard Shortcuts** – Enter to add, Escape to cancel editing  
+## Features
 
-## 📁 Project Structure
+### Core Functionality
+- **Task Management**: Add, edit, delete, and toggle task completion
+- **Smart Filtering**: View all tasks, pending tasks, or completed tasks
+- **Persistent Storage**: Tasks are automatically saved to local storage
+- **Bulk Operations**: Clear all completed tasks with confirmation modal
+
+### User Experience
+- **Terminal Aesthetic**: Authentic command-line interface design with blinking cursor
+- **Modal Dialogs**: Clean modal interfaces for editing and deletion confirmations
+- **Toast Notifications**: Non-intrusive success/error messages with auto-dismiss
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Keyboard Navigation**: Full keyboard support with ESC key modal dismissal
+
+### Technical Features
+- **XSS Protection**: Secure HTML sanitization prevents code injection
+- **Input Validation**: Comprehensive validation with duplicate detection
+- **Performance Optimized**: Efficient DOM manipulation and event handling
+- **Accessibility Ready**: ARIA labels and screen reader support
+- **Cross-Browser Compatible**: Works on all modern browsers
+
+## Installation
+
+### Prerequisites
+- A modern web browser (Chrome, Firefox, Safari, Edge)
+- A local web server (optional, but recommended for development)
+
+### Quick Start
+
+1. **Download the project files**
+   ```bash
+   git clone https://github.com/yourusername/trackle-task-manager.git
+   cd trackle-task-manager
+   ```
+
+2. **File structure should look like this:**
+   ```
+   trackle/
+   ├── index.html
+   ├── styles/
+   │   └── styles.css
+   ├── scripts/
+   │   └── app.js
+   └── assets/
+       └── icons/
+           └── favicon.ico
+   ```
+
+3. **Open in browser**
+   - **Option A**: Double-click `index.html` to open directly in browser
+   - **Option B**: Use a local server (recommended)
+     ```bash
+     # Using Python 3
+     python -m http.server 8000
+     
+     # Using Node.js (with http-server)
+     npx http-server
+     
+     # Then visit http://localhost:8000
+     ```
+
+## Usage
+
+### Basic Operations
+
+#### Adding Tasks
+1. Type your task in the input field after the `root@trackle:~$` prompt
+2. Press Enter or click the "Add" button
+3. Task appears at the top of the list
+
+#### Managing Tasks
+- **Complete Task**: Click the checkbox next to any task
+- **Edit Task**: Hover over a task and click the "Edit" button
+- **Delete Task**: Hover over a task and click the "Del" button
+- **Clear Completed**: Click "Clear Done" button when you have completed tasks
+
+#### Filtering Tasks
+Use the filter buttons to view different task sets:
+- **All**: Shows all tasks (default)
+- **Pending**: Shows only incomplete tasks
+- **Done**: Shows only completed tasks
+
+### Keyboard Shortcuts
+- **Escape**: Close any open modal
+- **Enter**: Confirm actions in modals
+- **Tab**: Navigate through interface elements
+
+### Data Persistence
+- Tasks are automatically saved to browser's local storage
+- Data persists between browser sessions
+- No server or account required
+
+## File Structure
 
 ```
-📦 trackle/
-├── 📄 index.html          # Main app layout with Bulma framework
-├── 🎨 styles.css          # Custom styling and responsive design
-├── ⚙️ script.js           # ES6+ class-based app logic & storage
-├── 📚 README.md           # Comprehensive project documentation
-└── 📁 assets/             # Static resources
-    ├── 🖼️ icons/          # Custom task icons
-    └── 🖼️ images/         # App images and screenshots
+trackle/
+├── index.html              # Main HTML structure
+├── styles/
+│   └── styles.css          # All styling and responsive design
+├── scripts/
+│   └── app.js              # Application logic and functionality
+├── assets/
+│   └── icons/
+│       └── favicon.ico     # Browser tab icon
+└── README.md               # Project documentation
 ```
 
-## 🛠️ Tech Stack
+### Key Components
 
-### **Frontend Framework**
-- **HTML5** – Semantic markup with accessibility features  
-- **Bulma CSS** – Modern CSS framework for responsive design  
-- **Font Awesome** – Professional icon library  
-- **JavaScript ES6+** – Class-based architecture with modern features  
+#### HTML Structure
+- Semantic HTML5 markup
+- Accessibility attributes (ARIA labels)
+- Modal dialogs for confirmations
+- Toast notification container
 
-### **Data & Storage**
-- **Browser Local Storage** – Client-side persistent task storage  
-- **JSON Serialization** – Structured data format for task objects  
+#### CSS Architecture
+- CSS Custom Properties (variables) for theming
+- Flexbox layout system
+- Mobile-first responsive design
+- Terminal-inspired color scheme and typography
 
-### **Development Tools**
-- **CDN Integration** – Fast loading via Bulma and Font Awesome CDNs  
-- **Responsive Design** – Mobile-first approach with Bulma's grid system  
-- **Cross-browser Compatibility** – Works on all modern browsers  
+#### JavaScript Classes
+- `TodoApp`: Main application class
+- Modular method organization
+- Event-driven architecture
+- Local storage integration
 
-## 🚀 Getting Started
+## Technologies Used
 
-### **Quick Setup**
-1. **Clone or Download** the project files
-2. **Open** `index.html` in your web browser
-3. **Start Adding Tasks** – No server or installation required!
+### Frontend
+- **HTML5**: Semantic markup and structure
+- **CSS3**: Styling, animations, and responsive design
+- **Vanilla JavaScript (ES6+)**: Application logic and DOM manipulation
 
-### **File Dependencies**
-- Bulma CSS (v1.0.4) – Loaded via CDN
-- Font Awesome (v6.4.0) – Loaded via CDN
-- No build process or npm dependencies needed
+### External Dependencies
+- **Font Awesome 6.4.0**: Icons and visual elements (loaded via CDN with integrity check)
 
-## 🎮 How to Use
+### Browser APIs
+- **Local Storage API**: Data persistence
+- **DOM API**: Dynamic content manipulation
+- **Event API**: User interaction handling
 
-### **Adding Tasks**
-- Type your task in the input field
-- Press `Enter` or click the **Add** button
-- Empty tasks are automatically rejected with notifications
+## Browser Compatibility
 
-### **Managing Tasks**
-- **Complete**: Click the checkbox to mark tasks as done
-- **Edit**: Click the edit icon (✏️) to modify task text
-- **Delete**: Click the trash icon (🗑️) and confirm deletion
+| Browser | Minimum Version | Status |
+|---------|----------------|--------|
+| Chrome  | 60+            | ✅ Fully Supported |
+| Firefox | 55+            | ✅ Fully Supported |
+| Safari  | 12+            | ✅ Fully Supported |
+| Edge    | 79+            | ✅ Fully Supported |
 
-### **Filtering & Organization**
-- Use **All**, **Completed**, or **Pending** buttons to filter tasks
-- View live statistics for total, completed, and remaining tasks
-- Tasks persist automatically – no manual saving required
+## Security Features
 
-## 🎨 UI/UX Design Features
+### Input Sanitization
+- HTML content is sanitized to prevent XSS attacks
+- Special characters are properly escaped
+- User input validation and length limits
 
-### **Visual Design**[1]
-- **Full-page Responsive Layout** – Optimized for all screen sizes
-- **Modern Gradient Background** – Eye-catching purple-blue gradient
-- **Clean Card-based Interface** – Tasks displayed in elegant cards
-- **Smooth Animations** – Slide-in effects for new tasks and hover states
+### External Resources
+- Font Awesome loaded with SHA-512 integrity check
+- Subresource Integrity (SRI) protection
+- CORS headers for secure external resource loading
 
-### **User Experience**
-- **Intuitive Icons** – Clear visual indicators for all actions
-- **Color-coded Feedback** – Success (green), warnings (yellow), errors (red)
-- **Mobile-optimized** – Touch-friendly buttons and responsive layout
-- **Keyboard Navigation** – Full keyboard accessibility support
+## Performance Optimizations
 
-## 🔧 Technical Implementation
+### Client-Side
+- Efficient DOM manipulation with document fragments
+- Event delegation for dynamic content
+- Debounced input handling
+- Minimal reflows and repaints
 
-### **Class-based Architecture**
-```javascript
-class TodoApp {
-  // Modern ES6+ class structure
-  // Modular method organization
-  // Clean separation of concerns
+### Loading
+- Optimized CSS and JavaScript file sizes
+- Font preloading for better performance
+- Minimal external dependencies
+
+## Customization
+
+### Theming
+The application uses CSS custom properties for easy theming. Key variables include:
+
+```css
+:root {
+  --primary: #00ff88;      /* Main accent color */
+  --accent: #ff9500;       /* Secondary accent */
+  --error: #ff4757;        /* Error states */
+  --success: #4caf50;      /* Success states */
+  --bg-dark: #0a0e27;      /* Dark background */
+  --bg-black: #000;        /* Pure black backgrounds */
 }
 ```
 
-### **Key Components**
-- **Task Management** – CRUD operations with validation
-- **Local Storage Handler** – Automatic save/load functionality
-- **Filter System** – Dynamic task filtering with state management
-- **Notification System** – Toast messages with auto-dismiss
-- **Statistics Engine** – Real-time task counting and updates
+### Configuration
+Modify these constants in `app.js` to customize behavior:
 
-## 📱 Responsive Breakpoints
+```javascript
+const CONFIG = {
+  MAX_TASK_LENGTH: 100,           // Maximum characters per task
+  LOCAL_STORAGE_KEY: 'trackle-tasks', // Storage key name
+  TOAST_DURATION: 4000            // Toast display time (ms)
+};
+```
 
-| Screen Size | Layout Changes |
-|-------------|---------------|
-| **Desktop** (1024px+) | Full 8-column centered layout |
-| **Tablet** (769px-1023px) | 10-column layout with adjusted spacing |
-| **Mobile** (< 768px) | Single column, stacked buttons, compressed header |
+## Contributing
 
-## 🎯 Future Enhancements
+### Development Setup
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Test thoroughly across different browsers
+5. Commit your changes (`git commit -m 'Add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
 
-### **Planned Features**
-- 🎨 **Dark/Light Theme Toggle** – User preference customization
-- 📅 **Due Date Support** – Calendar integration with overdue alerts  
-- 🏷️ **Task Categories** – Color-coded task organization
-- 🔍 **Search Functionality** – Find tasks by keyword
-- 📊 **Productivity Analytics** – Task completion trends and insights
-- ☁️ **Cloud Sync** – Backup tasks to cloud storage services
+### Coding Standards
+- Use ES6+ JavaScript features
+- Follow semantic HTML practices
+- Maintain consistent CSS naming conventions
+- Add comments for complex logic
+- Ensure responsive design compatibility
 
-## 🤝 Contributing
+### Bug Reports
+When reporting bugs, please include:
+- Browser and version
+- Steps to reproduce
+- Expected vs actual behavior
+- Screenshots if applicable
 
-We welcome contributions! Please feel free to submit pull requests or open issues for:
-- Bug fixes and improvements
-- New feature implementations  
-- UI/UX enhancements
-- Documentation updates
+## License
 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-**Built with ❤️ using modern web technologies and Bulma CSS framework**
+## Acknowledgments
+
+- Terminal design inspired by classic command-line interfaces
+- Color scheme influenced by cyberpunk aesthetics
+- Icons provided by Font Awesome
+- Built with modern web standards and best practices
+
+## Roadmap
+
+### Planned Features
+- [ ] Task categories and tags
+- [ ] Due dates and reminders
+- [ ] Import/export functionality
+- [ ] Keyboard shortcuts overlay
+- [ ] Dark/light theme toggle
+- [ ] Task search functionality
+- [ ] Drag and drop reordering
+
+### Known Issues
+- Local storage has browser-imposed size limits
+- No synchronization across devices (local only)
+
+**Made with ❤️ by the Trackle Team**

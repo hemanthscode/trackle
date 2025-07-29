@@ -3,125 +3,182 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To-Do List App</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    <title>Trackle - Terminal Task Manager</title>
+    <meta
+      name="description"
+      content="Clean terminal-themed task management app"
     />
-    <link rel="stylesheet" href="/styles/styles.css" />
+
+    <!-- External Resources with Integrity -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <link rel="icon" href="./assets/icons/favicon.ico" type="image/x-icon" />
   </head>
   <body>
-    <div class="hero is-fullheight is-primary">
-      <div class="hero-body">
-        <div class="container">
-          <!-- Header -->
-          <div class="has-text-centered mb-6">
-            <h1 class="title is-1 has-text-white">
-              <i class="fas fa-tasks mr-3"></i>To-Do List
-            </h1>
-            <p class="subtitle is-4 has-text-white">
-              Stay organized, get things done
-            </p>
+    <div class="app">
+      <!-- Header -->
+      <header class="header">
+        <h1>
+          <span class="prompt">$</span> trackle<span class="cursor">_</span>
+        </h1>
+      </header>
+
+      <!-- Terminal Container -->
+      <main class="terminal">
+        <!-- Add Task Section -->
+        <section class="add-section">
+          <form id="taskForm" class="task-form">
+            <div class="input-group">
+              <label class="prompt-label">root@trackle:~$</label>
+              <input
+                type="text"
+                id="taskInput"
+                placeholder="add new task..."
+                maxlength="100"
+                autocomplete="off"
+                required
+              />
+              <button type="submit" class="add-btn">
+                <i class="fas fa-plus"></i>
+                <span>Add</span>
+              </button>
+            </div>
+            <div id="errorMsg" class="message error"></div>
+          </form>
+
+          <!-- Filters -->
+          <div class="filters">
+            <button class="filter-btn active" data-filter="all">
+              <i class="fas fa-list"></i> All (<span id="allCount">0</span>)
+            </button>
+            <button class="filter-btn" data-filter="pending">
+              <i class="fas fa-clock"></i> Pending (<span id="pendingCount"
+                >0</span
+              >)
+            </button>
+            <button class="filter-btn" data-filter="completed">
+              <i class="fas fa-check"></i> Done (<span id="doneCount">0</span>)
+            </button>
+          </div>
+        </section>
+
+        <!-- Tasks Section -->
+        <section class="tasks-section">
+          <div class="tasks-header">
+            <h2><i class="fas fa-terminal"></i> Task List</h2>
+            <button id="clearBtn" class="clear-btn" style="display: none">
+              <i class="fas fa-trash"></i> Clear Done
+            </button>
           </div>
 
-          <!-- Main App Container -->
-          <div class="columns is-centered">
-            <div class="column is-8-desktop is-10-tablet">
-              <div class="box has-background-white-bis">
-                <!-- Task Input Section -->
-                <div class="field has-addons mb-5">
-                  <div class="control is-expanded">
-                    <input
-                      class="input is-large"
-                      type="text"
-                      id="taskInput"
-                      placeholder="What needs to be done?"
-                      autocomplete="off"
-                    />
-                  </div>
-                  <div class="control">
-                    <button class="button is-large is-primary" id="addTaskBtn">
-                      <i class="fas fa-plus mr-2"></i>Add
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Task Statistics -->
-                <div class="level mb-4">
-                  <div class="level-item has-text-centered">
-                    <div>
-                      <p class="heading">Total Tasks</p>
-                      <p class="title is-4" id="totalTasks">0</p>
-                    </div>
-                  </div>
-                  <div class="level-item has-text-centered">
-                    <div>
-                      <p class="heading">Completed</p>
-                      <p
-                        class="title is-4 has-text-success"
-                        id="completedTasks"
-                      >
-                        0
-                      </p>
-                    </div>
-                  </div>
-                  <div class="level-item has-text-centered">
-                    <div>
-                      <p class="heading">Remaining</p>
-                      <p
-                        class="title is-4 has-text-warning"
-                        id="remainingTasks"
-                      >
-                        0
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Filter Buttons -->
-                <div class="field is-grouped is-grouped-centered mb-4">
-                  <div class="control">
-                    <button class="button is-info is-active" data-filter="all">
-                      All
-                    </button>
-                  </div>
-                  <div class="control">
-                    <button class="button is-success" data-filter="completed">
-                      Completed
-                    </button>
-                  </div>
-                  <div class="control">
-                    <button class="button is-warning" data-filter="pending">
-                      Pending
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Tasks Container -->
-                <div id="tasksContainer">
-                  <!-- Tasks will be dynamically inserted here -->
-                </div>
-
-                <!-- Empty State -->
-                <div id="emptyState" class="has-text-centered py-6">
-                  <i
-                    class="fas fa-clipboard-list fa-3x has-text-grey-light mb-3"
-                  ></i>
-                  <p class="has-text-grey">
-                    No tasks yet. Add one above to get started!
-                  </p>
-                </div>
-              </div>
+          <div class="tasks-container">
+            <ul id="taskList" class="task-list"></ul>
+            <div id="emptyState" class="empty-state">
+              <i class="fas fa-code"></i>
+              <p>// No tasks found. Execute command above!</p>
             </div>
           </div>
+        </section>
+
+        <!-- Stats -->
+        <footer class="stats">
+          <div class="stat">
+            <i class="fas fa-chart-bar"></i>
+            <span>Total: <strong id="totalTasks">0</strong></span>
+          </div>
+          <div class="stat">
+            <i class="fas fa-check-circle"></i>
+            <span>Done: <strong id="completedTasks">0</strong></span>
+          </div>
+          <div class="stat">
+            <i class="fas fa-hourglass-half"></i>
+            <span>Pending: <strong id="pendingTasks">0</strong></span>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3><i class="fas fa-edit"></i> Edit Task</h3>
+          <button class="close-btn" id="editClose">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <input
+          type="text"
+          id="editInput"
+          placeholder="modify task..."
+          maxlength="100"
+        />
+        <div class="modal-actions">
+          <button id="cancelEdit" class="btn-secondary">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+          <button id="saveEdit" class="btn-primary">
+            <i class="fas fa-save"></i> Save
+          </button>
         </div>
       </div>
     </div>
 
-    <script src="scripts/app.js"></script>
+    <!-- Delete Modal -->
+    <div id="deleteModal" class="modal">
+      <div class="modal-content delete-modal">
+        <div class="modal-header">
+          <h3><i class="fas fa-exclamation-triangle"></i> Delete Task</h3>
+          <button class="close-btn" id="deleteClose">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="delete-content">
+          <p>Are you sure you want to delete this task?</p>
+          <div class="task-preview" id="deletePreview"></div>
+        </div>
+        <div class="modal-actions">
+          <button id="cancelDelete" class="btn-secondary">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+          <button id="confirmDelete" class="btn-danger">
+            <i class="fas fa-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Clear Completed Modal -->
+    <div id="clearCompletedModal" class="modal">
+      <div class="modal-content delete-modal">
+        <div class="modal-header">
+          <h3><i class="fas fa-trash-alt"></i> Clear Completed Tasks</h3>
+          <button class="close-btn" id="clearClose">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="delete-content">
+          <p id="clearCompletedMessage"></p>
+        </div>
+        <div class="modal-actions">
+          <button id="cancelClear" class="btn-secondary">
+            <i class="fas fa-times"></i> Cancel
+          </button>
+          <button id="confirmClear" class="btn-danger">
+            <i class="fas fa-trash"></i> Clear
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="./scripts/app.js"></script>
   </body>
 </html>
